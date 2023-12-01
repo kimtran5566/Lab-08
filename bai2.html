@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palindrome Checker</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+
+    <div>
+        <label for="inputNumber">Nhập giá trị N:</label>
+        <input type="text" id="inputNumber" />
+        <button id="checkPalindrome">Kiểm tra</button>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $('#checkPalindrome').on('click', function() {
+                // Lấy giá trị từ input
+                var inputValue = $('#inputNumber').val();
+
+                // Kiểm tra nếu người dùng không nhập giá trị
+                if (!inputValue) {
+                    $('#result').text('Vui lòng nhập giá trị N.');
+                    return;
+                }
+
+                // Kiểm tra nếu giá trị không phải là số
+                if (isNaN(inputValue)) {
+                    $('#result').text('N không phải là số.');
+                    return;
+                }
+
+                // Kiểm tra số thuận nghịch
+                if (isPalindrome(inputValue)) {
+                    $('#result').text('N là số thuận nghịch.');
+                } else {
+                    $('#result').text('N không phải là số thuận nghịch.');
+                }
+            });
+
+            // Hàm kiểm tra số thuận nghịch
+            function isPalindrome(str) {
+                var reversedStr = str.toString().split('').reverse().join('');
+                return str.toString() === reversedStr;
+            }
+        });
+    </script>
+
+</body>
+</html>

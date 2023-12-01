@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer App</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+
+    <div>
+        <div id="timerDisplay">00:00:00</div>
+        <button id="startContinue">Start</button>
+        <button id="pause">Pause</button>
+        <button id="reset">Reset</button>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            var timer;
+            var isRunning = false;
+            var time = 0;
+
+            function updateDisplay() {
+                var hours = Math.floor(time / 3600);
+                var minutes = Math.floor((time % 3600) / 60);
+                var seconds = time % 60;
+
+                var displayTime = 
+                    (hours < 10 ? "0" : "") + hours + ":" +
+                    (minutes < 10 ? "0" : "") + minutes + ":" +
+                    (seconds < 10 ? "0" : "") + seconds;
+
+                $('#timerDisplay').text(displayTime);
+            }
+
+            function startTimer() {
+                timer = setInterval(function() {
+                    time++;
+                    updateDisplay();
+                }, 1000);
+
+                isRunning = true;
+            }
+
+            function pauseTimer() {
+                clearInterval(timer);
+                isRunning = false;
+            }
+
+            function resetTimer() {
+                clearInterval(timer);
+                isRunning = false;
+                time = 0;
+                updateDisplay();
+                $('#startContinue').text('Start');
+            }
+
+            $('#startContinue').on('click', function() {
+                if (!isRunning) {
+                    startTimer();
+                    $(this).text('Continue');
+                } else {
+                    pauseTimer();
+                    $(this).text('Start');
+                }
+            });
+
+            $('#pause').on('click', function() {
+                pauseTimer();
+                $('#startContinue').text('Continue');
+            });
+
+            $('#reset').on('click', function() {
+                resetTimer();
+            });
+        });
+    </script>
+
+</body>
+</html>
