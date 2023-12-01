@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Học web chuẩn</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Bắt sự kiện khi giá trị của ô input thay đổi
+            $("#nameA, #nameB").on("input", function () {
+                // Lấy giá trị từ hai ô input
+                var numA = parseFloat($("#nameA").val());
+                var numB = parseFloat($("#nameB").val());
+
+                // Kiểm tra nếu không phải là số thì thông báo lỗi
+                if (isNaN(numA) || isNaN(numB)) {
+                    $("#result").text("Vui lòng nhập số hợp lệ.");
+                } else {
+                    // So sánh và in ra số lớn hơn
+                    var result = (numA > numB) ? numA : numB;
+                    $("#result").text(result);
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <input type="text" id="nameA" value="0"> <input type="text" id="nameB" value="0">
+    <div>Max: <span id="result"></span></div>
+</body>
+</html>
