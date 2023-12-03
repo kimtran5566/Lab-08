@@ -7,10 +7,36 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
     <script>
-        
+        $(function(){
+            // Code to run when the document is ready
+
+            // Initial HTML content
+            var originalContent = $('#box').html();
+            var newContent = '<h3>New Title</h3><div>New content after first click</div>';
+
+            // Variable to track the current state
+            var isOriginalState = true;
+
+            // Attach a click event to the button
+            $('button').on('click', function(){
+                // Toggle between original content and new content
+                if (isOriginalState) {
+                    $('#box').html(newContent);
+                } else {
+                    $('#box').html(originalContent);
+                }
+
+                // Update the state for the next click
+                isOriginalState = !isOriginalState;
+            });
+        });
     </script>
 </head>
 <body>
-    
+    <div id="box">
+        <h3>Title</h3>
+        <div>In suscipit nec velit sit amet convallis. Integer</div>
+    </div>
+    <button type="button">Click</button>
 </body>
 </html>
